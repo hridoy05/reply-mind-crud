@@ -7,7 +7,7 @@
     "dev": "nodemon ./bin/app.ts"
   },
   "prisma": {
-    "seed": "node prisma/seed/seed.js"
+    "seed": "node prisma/seed/seed.ts"
   },
   "keywords": [],
   "author": "",

@@ -1,0 +1,36 @@
+version: "3"
+name: replymind
+
+networks:
+  onethread-network:
+    driver: bridge
+
+services:
+  database:
+    image: postgres:14.9-alpine3.18
+    user: root
+    restart: always
+    ports:
+      - "${DB_PORT:-5432}:5432"
+    networks:
+      - replymind-network
+    volumes:
+      - ./data/pg_data:/var/lib/postgresql/data
+    environment:
+      POSTGRES_USER: ${DB_USER:-postgres}
+      POSTGRES_PASSWORD: ${DB_PASSWORD:-password}
+      POSTGRES_DB: ${DB_NAME}
+
+
+  pgadmin:
+    image: dpage/pgadmin4
+    user: root
+    ports:
+      - "${PGADMIN_PORT:-5051}:80"
+    networks:
+      - replymind-network
+    volumes:
+      - ./data/pgadmin_data:/var/lib/pgadmin
+    environment:
+      PGADMIN_DEFAULT_EMAIL: ${PGADMIN_DEFAULT_EMAIL:-test@test.com}
+      PGADMIN_DEFAULT_PASSWORD: ${PGADMIN_DEFAULT_PASSWORD:-test}

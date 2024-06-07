@@ -1,9 +1,11 @@
+import RegisterForm from "@/components/RegisterForm/RegisterForm";
 
 
 export default function Home() {
   return (
-    <>
-    <h1>Reply mind</h1>
-    </>
+    <div className="flex justify-center items-center">
+      <RegisterForm/>
+
+    </div>
   );
 }
