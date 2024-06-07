@@ -19,5 +19,6 @@
     "allowSyntheticDefaultImports": true,
     "pretty": true,
     "resolveJsonModule": true,
+    "typeRoots": ["./types"]
   }
 }
