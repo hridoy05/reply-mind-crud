@@ -1,7 +1,7 @@
 import { NextFunction, Request, Response } from 'express';
 import { prisma } from '../prisma/prismaDB';
 import jwt from 'jsonwebtoken';
-import { BadRequestError, NotFoundError, ServerError } from 'global-errors/error-handler';
+import { BadRequestError, NotFoundError, ServerError } from '../global-errors/error-handler';
 import { hashSync, compareSync } from 'bcrypt';
 import { JWT_SECRET } from '../secrets';
 
@@ -61,7 +61,7 @@ export const login = async (req: Request, res: Response, next: NextFunction) => 
 export const getAuthenticatedUserInfo = async (req: Request, res: Response, next: NextFunction) => {
   try {
     const user = await prisma.user.findUnique({
-      where: { id: req.user.id },
+      where: { id: (req as any).user.id },
     });
     return res.json(user);
   } catch (err) {
