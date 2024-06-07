@@ -12,10 +12,9 @@ import swaggerDefinition from './swagger.json'
 
 //import router
 import indexRouter from './routes/index'
-
+import apiRouter from './routes/api'
 
 const app: Express = express()
-require('dotenv').config();
 app.use(helmet());
 app.use(compression());
 app.use(express.json({ limit: '50mb' }))
@@ -23,7 +22,7 @@ app.use(cookieParser())
 app.use(urlencoded({ extended: true, limit: '50mb' }));
 //rootRouter`
 app.use('/health', indexRouter)
-// app.use('/api/v1', apiRouter)
+app.use('/api/v1', apiRouter)
 
 // Set up Swagger
 if(process.env.NODE_ENV !== 'production') {
@@ -41,7 +40,7 @@ if(process.env.NODE_ENV !== 'production') {
     }))
   }
 
-app.use('*', (req: Request, res: Response) => {
+app.use('*', (req: Request, res: Response,  next: NextFunction) => {
    return res.status(HTTP_STATUS.NOT_FOUND).json({ message: `${req.originalUrl} not found` });
 });
 
