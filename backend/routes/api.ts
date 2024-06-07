@@ -2,8 +2,8 @@ import express from 'express'
 
 const rootRouter = express.Router()
 
-import orderRouter from '../routes/v1/Order'
+import userRouter from './v1/User'
 
-rootRouter.use('/product' ,orderRouter)
+rootRouter.use('/user' ,userRouter)
 
 export default rootRouter

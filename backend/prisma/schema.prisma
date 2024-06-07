@@ -1,0 +1,42 @@
+generator client {
+  provider = "prisma-client-js"
+  previewFeatures = ["clientExtensions"]
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_CONNECTION_URL")
+}
+
+model User {
+  id           Int        @id @default(autoincrement())
+  email        String     @unique
+  password     String
+  bio          String?    @db.VarChar(50)
+  profession   Profession @relation(fields: [professionId], references: [id])
+  professionId Int
+  UserInterest UserInterest[]
+}
+
+model Profession {
+  id        Int       @id @default(autoincrement())
+  name      String
+  users     User[]
+  interests Interest[]
+}
+
+model Interest {
+  id           Int        @id @default(autoincrement())
+  name         String
+  profession   Profession @relation(fields: [professionId], references: [id])
+  professionId Int
+  UserInterest UserInterest[]
+}
+
+model UserInterest {
+  userId     Int
+  interestId Int
+  user       User      @relation(fields: [userId], references: [id])
+  interest   Interest  @relation(fields: [interestId], references: [id])
+  @@id([userId, interestId])
+}

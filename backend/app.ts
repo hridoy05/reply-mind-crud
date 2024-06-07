@@ -4,18 +4,18 @@ import helmet from 'helmet';
 import cookieParser from 'cookie-parser'
 import compression from 'compression';
 import HTTP_STATUS from 'http-status-codes';
-import { errLogger } from '../utils/logger'
-import { CustomError, IErrorResponse } from '../global-errors/error-handler';
+import { errLogger } from './utils/logger'
+import { CustomError, IErrorResponse } from './global-errors/error-handler';
 import  swaggerUi from 'swagger-ui-express'
 import swaggerJsdoc from 'swagger-jsdoc';
-import swaggerDefinition from '../swagger.json'
+import swaggerDefinition from './swagger.json'
 
 //import router
-import indexRouter from '../routes/index'
+import indexRouter from './routes/index'
 
 
 const app: Express = express()
-
+require('dotenv').config();
 app.use(helmet());
 app.use(compression());
 app.use(express.json({ limit: '50mb' }))
