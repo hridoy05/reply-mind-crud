@@ -13,13 +13,10 @@ $ sudo docker compose up -d
 $ npx prisma studio --browser none
 
 # Swagger UI
-# http://localhost:4000/api-docs/
+# http://localhost:5000/api-docs/
 
 # For testing
 $ yarn test
-
-# Build image locally
-$ docker build -t onushthan/backend:dev .
 
 # Commit without migration
 $ git add -- . ':!prisma/migrations'
