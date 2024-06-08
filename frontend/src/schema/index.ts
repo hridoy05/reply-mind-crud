@@ -13,6 +13,8 @@ export const RegisterSchema = z.object({
     path: ["confirmPassword"],
   });
 
+export type RegisterFormData = z.infer<typeof RegisterSchema>;
+
 export const LoginSchema = z.object({
     email: z.string().email({
         message: "Please enter a valid email address"

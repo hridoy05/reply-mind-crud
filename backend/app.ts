@@ -15,6 +15,9 @@ import indexRouter from './routes/index'
 import apiRouter from './routes/api'
 
 const app: Express = express()
+app.use(cors({
+  origin: "*"
+}))
 app.use(helmet());
 app.use(compression());
 app.use(express.json({ limit: '50mb' }))
